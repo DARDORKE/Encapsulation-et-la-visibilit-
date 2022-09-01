@@ -40,3 +40,13 @@ abstract class Artwork
 }
 
 // Implémentez cette classe abstraite en créant deux classes finales représentant les peintures et les sculptures.
+
+// Les statues sont posées sur des socles, ce qui augmente leur taille finale.
+// Le musée dispose de deux types de socles : des socles fixes de 10 cm et des socles extensibles,
+// qui peuvent avoir une taille entre 5 et 15 cm, avec une position de base à 5 cm.
+//
+// Intégrez les socles dans votre code pour calculer correctement la taille de la statue dans son accesseur.
+//
+// Attention : normalement, votre classe représentant les sculptures est une classe finale.
+// Interdiction donc de créer des classes filles SculptureWithFixedPedestal et SculptureWithVariablePedestal
+// pour gérer ces nouveaux cas !
