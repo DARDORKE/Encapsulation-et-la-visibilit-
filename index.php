@@ -1,48 +1,45 @@
 <?php
 
-//Pour une application de gestion d'articles de journaux, nous avons besoin d'encapsuler la gestion des textes dans une classe. Vous devez donc créer une classe Text qui sera utilisée par l'équipe de développement et qui comportera l'interface suivante :
-//
-//Une méthode getSentences() : array qui retourne un tableau de phrases composant le texte. Pour simplifier le problème, on considère que seuls les points seront utilisés dans nos textes pour séparer les phrases, et que toutes les phrases seront bien formées (une phrase à la fin de chacune).
-//
-//Une méthode getTextLength() : int qui retourne le nombre de caractères de notre texte.
-//
-//Une méthode getSentencesCount() : int qui retourne le nombre de phrases dans notre texte.
-//
-//Voici comment la classe pourrait être utilisée :
-
-//$text = new Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia quam sed lacinia blandit. In et viverra elit. Nullam molestie quam eget porta venenatis. Aenean blandit auctor turpis, eu rhoncus libero pulvinar id. Aenean euismod enim ac sagittis accumsan. Fusce venenatis purus orci, in euismod erat porttitor in. Morbi semper dignissim felis a tincidunt.');
-//print_r($text->getSentences());
-//echo 'Le texte possède '.$text->getSentencesCount().' phrases et '.$text->getTextLength().' caractères.';
+//Un hôpital vous demande d'améliorer le code de son application de gestion de patients pour
+// éviter au maximum que les données des utilisateurs soient mal manipulées.
+// Voici la classe actuelle :
 
 
-class Text
+class Patient
 {
-    public string $text;
+    public int $id;
+    public string $firstName;
+    public string $lastName;
 
-    public function __construct(string $text)
+    public function __construct(int $id)
     {
-        $this->text = $text;
+        $this->loadPatient($id);
     }
 
-    public function getSentences(): array
+    public function loadPatient(int $id)
     {
-        $sentences = explode('.', $this->text);
-        array_pop($sentences); //On enlève le dernier élément, toujours vide
+        // Nous simulons l'appel à une base de données en créant un tableau en dur
+        $data = [
+            'id' => $id,
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+        ];
 
-        return $sentences;
+        $this->id = $data['id'];
+        $this->firstName = $data['firstName'];
+        $this->lastName = $data['lastName'];
     }
 
-    public function getTextLength(): int
+    public function getFullName()
     {
-        return strlen($this->text);
-    }
-
-    public function getSentencesCount(): int
-    {
-        return count($this->getSentences());
+        return $this->firstName . ' ' . $this->lastName;
     }
 }
 
-$text = new Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia quam sed lacinia blandit. In et viverra elit. Nullam molestie quam eget porta venenatis. Aenean blandit auctor turpis, eu rhoncus libero pulvinar id. Aenean euismod enim ac sagittis accumsan. Fusce venenatis purus orci, in euismod erat porttitor in. Morbi semper dignissim felis a tincidunt.');
-print_r($text->getSentences());
-echo 'Le texte possède ' . $text->getSentencesCount() . ' phrases et ' . $text->getTextLength() . ' caractères.';
+//Protégez cette classe en effectuant les modifications suivantes :
+//
+//La propriété id ne doit pouvoir être manipulée que par notre classe : on ne doit pas pouvoir modifier l'id sous peine de modifier un autre patient que celui que l'on a chargé.
+//
+//Les propriétés firstName et lastName ne doivent jamais être récupérées directement par les scripts externes, mais toujours via la méthode getFullName(). En revanche, elles peuvent être manipulées par les classes filles.
+//
+//La méthode loadPatient()ne doit pouvoir être appelée que par notre classe. Un objet représentant un patient, on ne doit pas pouvoir appeler cette méthode ailleurs que dans le constructeur de notre classe.
