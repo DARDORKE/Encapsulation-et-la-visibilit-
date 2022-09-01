@@ -7,16 +7,16 @@
 
 class Patient
 {
-    public int $id;
-    public string $firstName;
-    public string $lastName;
+    private int $id;
+    protected string $firstName;
+    protected string $lastName;
 
     public function __construct(int $id)
     {
         $this->loadPatient($id);
     }
 
-    public function loadPatient(int $id)
+    private function loadPatient(int $id)
     {
         // Nous simulons l'appel à une base de données en créant un tableau en dur
         $data = [
