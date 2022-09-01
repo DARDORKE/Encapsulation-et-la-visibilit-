@@ -22,3 +22,51 @@
 //$meal->setIngredients(['Olives', 'Cheddar']);
 //echo $meal->getPrice(); // Affiche 12.5
 
+
+class Meal
+{
+    private string $name;
+    private array $ingredients;
+    protected float $price;
+
+    public function __construct(string $name, float $price)
+    {
+        $this->setName($name);
+        $this->setPrice($price);
+        $this->ingredients = [];
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getIngredients(): array
+    {
+        return $this->ingredients;
+    }
+
+    public function setIngredients(array $ingredients): void
+    {
+        $this->ingredients = $ingredients;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price + count($this->ingredients);
+    }
+
+    public function setPrice(float $price): void
+    {
+        $this->price = $price;
+    }
+}
+
+$meal = new Meal('Salade Caesar', 10.50);
+$meal->setIngredients(['Olives', 'Cheddar']);
+echo $meal->getPrice(); // Affiche 12.5
