@@ -1,45 +1,24 @@
 <?php
-
-//Un hôpital vous demande d'améliorer le code de son application de gestion de patients pour
-// éviter au maximum que les données des utilisateurs soient mal manipulées.
-// Voici la classe actuelle :
-
-
-class Patient
-{
-    private int $id;
-    protected string $firstName;
-    protected string $lastName;
-
-    public function __construct(int $id)
-    {
-        $this->loadPatient($id);
-    }
-
-    private function loadPatient(int $id)
-    {
-        // Nous simulons l'appel à une base de données en créant un tableau en dur
-        $data = [
-            'id' => $id,
-            'firstName' => 'John',
-            'lastName' => 'Doe',
-        ];
-
-        $this->id = $data['id'];
-        $this->firstName = $data['firstName'];
-        $this->lastName = $data['lastName'];
-    }
-
-    public function getFullName()
-    {
-        return $this->firstName . ' ' . $this->lastName;
-    }
-}
-
-//Protégez cette classe en effectuant les modifications suivantes :
+//Un restaurant souhaiterait avoir une application permettant de gérer les plats commandés par ses clients.
 //
-//La propriété id ne doit pouvoir être manipulée que par notre classe : on ne doit pas pouvoir modifier l'id sous peine de modifier un autre patient que celui que l'on a chargé.
+//Un plat possède les caractéristiques suivantes :
 //
-//Les propriétés firstName et lastName ne doivent jamais être récupérées directement par les scripts externes, mais toujours via la méthode getFullName(). En revanche, elles peuvent être manipulées par les classes filles.
+//Un nom, qui est une chaîne de caractères. Il doit être défini dans le constructeur,
+// être accessible depuis l’extérieur en lecture, mais ne doit pas être modifiable.
 //
-//La méthode loadPatient()ne doit pouvoir être appelée que par notre classe. Un objet représentant un patient, on ne doit pas pouvoir appeler cette méthode ailleurs que dans le constructeur de notre classe.
+//Une liste d'ingrédients en supplément, qui est un tableau de chaînes de caractères.
+// Ce sont les ingrédients que les utilisateurs veulent rajouter dans leur plat.
+// Ils doivent être modifiables et accessibles depuis l’extérieur de notre classe.
+//
+//Un prix, qui est un nombre à virgule. Il doit être défini dans le constructeur et ne doit pas être modifiable.
+// On doit pouvoir cependant récupérer le prix à l’extérieur de la classe, mais en prenant en compte la majoration de 1 €
+// par ingrédient supplémentaire. Il doit être manipulable directement par les classes filles.
+//
+//Créez une classe permettant de gérer ces contraintes.
+//
+//Voici un exemple d'utilisation :
+
+//$meal = new Meal('Salade Caesar', 10.50);
+//$meal->setIngredients(['Olives', 'Cheddar']);
+//echo $meal->getPrice(); // Affiche 12.5
+
