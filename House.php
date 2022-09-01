@@ -6,9 +6,9 @@ final class House extends RealEstate
 {
     private int $levelCount;
 
-    public function __construct(string $address, float $price, float $surface, int $levelCount)
+    public function __construct(string $address, float $price, float $surface, int $levelCount, ?Annex $annex = null)
     {
-        parent::__construct($address, $price, $surface);
+        parent::__construct($address, $price, $surface, $annex);
         $this->setLevelCount($levelCount);
     }
 

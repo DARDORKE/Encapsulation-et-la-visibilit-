@@ -1,15 +1,18 @@
 <?php
 
-abstract class RealEstate {
+abstract class RealEstate
+{
     private string $address;
     private float $price;
     private float $surface;
+    private ?Annex $annex;
 
-    public function __construct(string $address, float $price, float $surface)
+    public function __construct(string $address, float $price, float $surface, ?Annex $annex = null)
     {
-        $this->address = $address;
-        $this->price = $price;
-        $this->surface = $surface;
+        $this->setAddress($address);
+        $this->setPrice($price);
+        $this->setSurface($surface);
+        $this->setAnnex($annex);
     }
 
     public function getAddress(): string
@@ -19,7 +22,7 @@ abstract class RealEstate {
 
     public function setAddress(string $address): void
     {
-        $this->address = $address;
+    $this->address = $address;
     }
 
     public function getPrice(): float
@@ -34,11 +37,25 @@ abstract class RealEstate {
 
     public function getSurface(): float
     {
+        if ($this->annex !== null) {
+            return $this->surface + $this->annex->getAdditionalSurface();
+        }
+
         return $this->surface;
     }
 
     public function setSurface(float $surface): void
     {
         $this->surface = $surface;
+    }
+
+    public function getAnnex(): ?Annex
+    {
+        return $this->annex;
+    }
+
+    public function setAnnex(?Annex $annex): void
+    {
+        $this->annex = $annex;
     }
 }

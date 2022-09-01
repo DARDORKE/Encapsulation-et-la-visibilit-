@@ -6,10 +6,10 @@ final class Flat extends RealEstate
 {
     private int $floor;
 
-    public function __construct(string $address, float $price, float $surface, int $floor)
+    public function __construct(string $address, float $price, float $surface, int $floor, ?Annex $annex = null)
     {
-        parent::__construct($address, $price, $surface);
-        $this->floor = $floor;
+        parent::__construct($address, $price, $surface, $annex);
+        $this->setFloor($floor);
     }
 
     public function getFloor(): int
