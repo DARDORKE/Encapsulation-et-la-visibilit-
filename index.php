@@ -1,72 +1,42 @@
 <?php
-//Un restaurant souhaiterait avoir une application permettant de gérer les plats commandés par ses clients.
+// Un musée est en charge de peintures et de sculptures. Ces deux œuvres ont des caractéristiques communes :
+// un titre, et le nom de l'artiste qui l'a réalisée.
+// Cependant, les peintures ont aussi un type (aquarelle, peinture à l'huile, gouache...).
+// Les sculptures, quant à elles, ont une hauteur en centimètres.
 //
-//Un plat possède les caractéristiques suivantes :
-//
-//Un nom, qui est une chaîne de caractères. Il doit être défini dans le constructeur,
-// être accessible depuis l’extérieur en lecture, mais ne doit pas être modifiable.
-//
-//Une liste d'ingrédients en supplément, qui est un tableau de chaînes de caractères.
-// Ce sont les ingrédients que les utilisateurs veulent rajouter dans leur plat.
-// Ils doivent être modifiables et accessibles depuis l’extérieur de notre classe.
-//
-//Un prix, qui est un nombre à virgule. Il doit être défini dans le constructeur et ne doit pas être modifiable.
-// On doit pouvoir cependant récupérer le prix à l’extérieur de la classe, mais en prenant en compte la majoration de 1 €
-// par ingrédient supplémentaire. Il doit être manipulable directement par les classes filles.
-//
-//Créez une classe permettant de gérer ces contraintes.
-//
-//Voici un exemple d'utilisation :
-
-//$meal = new Meal('Salade Caesar', 10.50);
-//$meal->setIngredients(['Olives', 'Cheddar']);
-//echo $meal->getPrice(); // Affiche 12.5
+//Le logiciel actuel du musée permet déjà de gérer la base des informations avec la classe abstraite suivante :
 
 
-class Meal
+abstract class Artwork
 {
-    private string $name;
-    private array $ingredients;
-    protected float $price;
+    private string $title;
+    private string $artist;
 
-    public function __construct(string $name, float $price)
+    public function __construct(string $title, string $artist)
     {
-        $this->setName($name);
-        $this->setPrice($price);
-        $this->ingredients = [];
+        $this->title = $title;
+        $this->artist = $artist;
     }
 
-    public function getName(): string
+    public function getTitle(): string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(string $name): void
+    public function setTitle(string $title): void
     {
-        $this->name = $name;
+        $this->title = $title;
     }
 
-    public function getIngredients(): array
+    public function getArtist(): string
     {
-        return $this->ingredients;
+        return $this->artist;
     }
 
-    public function setIngredients(array $ingredients): void
+    public function setArtist(string $artist): void
     {
-        $this->ingredients = $ingredients;
-    }
-
-    public function getPrice(): float
-    {
-        return $this->price + count($this->ingredients);
-    }
-
-    public function setPrice(float $price): void
-    {
-        $this->price = $price;
+        $this->artist = $artist;
     }
 }
 
-$meal = new Meal('Salade Caesar', 10.50);
-$meal->setIngredients(['Olives', 'Cheddar']);
-echo $meal->getPrice(); // Affiche 12.5
+// Implémentez cette classe abstraite en créant deux classes finales représentant les peintures et les sculptures.
