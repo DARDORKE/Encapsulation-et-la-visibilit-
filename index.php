@@ -13,3 +13,36 @@
 //$text = new Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia quam sed lacinia blandit. In et viverra elit. Nullam molestie quam eget porta venenatis. Aenean blandit auctor turpis, eu rhoncus libero pulvinar id. Aenean euismod enim ac sagittis accumsan. Fusce venenatis purus orci, in euismod erat porttitor in. Morbi semper dignissim felis a tincidunt.');
 //print_r($text->getSentences());
 //echo 'Le texte possède '.$text->getSentencesCount().' phrases et '.$text->getTextLength().' caractères.';
+
+
+class Text
+{
+    public string $text;
+
+    public function __construct(string $text)
+    {
+        $this->text = $text;
+    }
+
+    public function getSentences(): array
+    {
+        $sentences = explode('.', $this->text);
+        array_pop($sentences); //On enlève le dernier élément, toujours vide
+
+        return $sentences;
+    }
+
+    public function getTextLength(): int
+    {
+        return strlen($this->text);
+    }
+
+    public function getSentencesCount(): int
+    {
+        return count($this->getSentences());
+    }
+}
+
+$text = new Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia quam sed lacinia blandit. In et viverra elit. Nullam molestie quam eget porta venenatis. Aenean blandit auctor turpis, eu rhoncus libero pulvinar id. Aenean euismod enim ac sagittis accumsan. Fusce venenatis purus orci, in euismod erat porttitor in. Morbi semper dignissim felis a tincidunt.');
+print_r($text->getSentences());
+echo 'Le texte possède ' . $text->getSentencesCount() . ' phrases et ' . $text->getTextLength() . ' caractères.';
